@@ -1,6 +1,6 @@
 defmodule IslandsEngine.Island do
   alias IslandsEngine.{Coordinate, Island}
-
+  @island_types [ :atoll, :dot, :l_shape, :s_shape, :square ]
   @enforce_keys [ :coordinates, :hit_coordinates ]
   defstruct [ :coordinates, :hit_coordinates ]
 
@@ -12,6 +12,8 @@ defmodule IslandsEngine.Island do
       error -> error
     end
   end
+
+  def types(), do: @island_types
 
   defp offsets(:square),do: [{0,0},{0,1},{1,0},{1,1}]
   defp offsets(:atoll), do: [{0,0},{0,1},{1,1},{2,0},{2,1}]
