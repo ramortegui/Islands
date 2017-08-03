@@ -4,7 +4,7 @@ defmodule IslandsEngine.Game do
   @players [:player1, :player2]
 
   def start_link(name) do
-    GenServer.start_link(__MODULE__,name,[])
+    GenServer.start_link(__MODULE__,name,name: via_tuple(name))
   end
 
   def init( name ) do
@@ -118,4 +118,6 @@ defmodule IslandsEngine.Game do
       Guesses.add(guesses, hit_or_miss, coordinate)
     end)
   end
+
+  def via_tuple(name), do: {:via, Registry, { Registry.Game, name }}
 end
